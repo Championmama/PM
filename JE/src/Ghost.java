@@ -53,6 +53,10 @@ public class Ghost extends Character {
     private int fairnessTimer;
 
     public void move() {
+        if(fairnessTimer > 0) {
+            fairnessTimer--;
+            return;
+        }
         int directionR;
 
         float dx = target.get(M_Axis.X) - getX() + (float)(Math.random()-0.5)*5;

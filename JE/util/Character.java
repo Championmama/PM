@@ -1,5 +1,5 @@
 package util;
-import src.Animator;
+import src.Setting;
 import util.Position.M_Axis;
 
 
@@ -32,10 +32,10 @@ public class Character {
     }
 
     public int getWindowXCoord() {
-        return Animator.settings.outmargin + 7 + getX() * (Animator.settings.CellWidth + Animator.settings.inmargin);
+        return Setting.Animator.outmargin + 7 + getX() * (Setting.Animator.CellWidth + Setting.Animator.inmargin);
     }
     public int getWindowYCoord() {
-        return Animator.settings.outmargin + 30 + getY() * (Animator.settings.CellHeight + Animator.settings.inmargin);
+        return Setting.Animator.outmargin + 30 + getY() * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
     public class ret {

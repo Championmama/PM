@@ -2,7 +2,6 @@ package src;
 
 import java.awt.event.*;
 
-import util.Position;
 import util.Position.M_Axis;
 
 public class Ticker implements ActionListener {

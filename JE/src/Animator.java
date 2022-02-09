@@ -33,19 +33,19 @@ public class Animator {
                         m_g.fillRect(
                                 getWindowXCoord(x),
                                 getWindowYCoord(y),
-                                settings.CellWidth,
-                                settings.CellHeight);
+                                Setting.Animator.CellWidth,
+                                Setting.Animator.CellHeight);
                         m_g.setColor(new Color(0x010160));
                         m_g.fillRect(
                                 getWindowXCoord(x),
                                 getWindowYCoord(y),
-                                settings.CellWidth,
+                                Setting.Animator.CellWidth,
                                 1);
                         m_g.fillRect(
                                 getWindowXCoord(x),
                                 getWindowYCoord(y),
                                 1,
-                                settings.CellHeight);
+                                Setting.Animator.CellHeight);
 
                         break;
                     case 2: // Cherry
@@ -66,8 +66,8 @@ public class Animator {
                         drawBG(x, y);
                         m_g.setColor(new Color(0xffb1ff));
                         m_g.fillRect(getWindowXCoord(x),
-                                getWindowYCoord(y) + settings.CellHeight / 2-2,
-                                settings.CellWidth, 4);
+                                getWindowYCoord(y) + Setting.Animator.CellHeight / 2-2,
+                                Setting.Animator.CellWidth, 4);
                         break;
                     default:
                         drawBG(x, y);
@@ -82,11 +82,11 @@ public class Animator {
     }
 
     public static int getWindowXCoord(int x) {
-        return settings.outmargin + 7 + x * (settings.CellWidth + settings.inmargin);
+        return Setting.Animator.outmargin + 7 + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin);
     }
 
     public static int getWindowYCoord(int y) {
-        return settings.outmargin + 30 + y * (settings.CellHeight + settings.inmargin);
+        return Setting.Animator.outmargin + 30 + y * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
     public static void drawBG(int x, int y) {
@@ -94,17 +94,17 @@ public class Animator {
         m_g.fillRect(
                 getWindowXCoord(x),
                 getWindowYCoord(y),
-                settings.CellWidth, settings.CellHeight);
+                Setting.Animator.CellWidth, Setting.Animator.CellHeight);
     }
 
     private static void drawPointwBG(int x, int y, Color c) {
         drawBG(x, y);
         m_g.setColor(c);
         m_g.fillOval(
-                settings.outmargin + 4 + (int) settings.CellWidth / 2
-                        + x * (settings.CellWidth + settings.inmargin),
-                settings.outmargin + 27 + (int) settings.CellHeight / 2
-                        + y * (settings.CellHeight + settings.inmargin),
-                settings.CellWidth/3, settings.CellHeight/3);
+            Setting.Animator.outmargin + 4 + (int) Setting.Animator.CellWidth / 2
+                        + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin),
+                        Setting.Animator.outmargin + 27 + (int) Setting.Animator.CellHeight / 2
+                        + y * (Setting.Animator.CellHeight + Setting.Animator.inmargin),
+                        Setting.Animator.CellWidth/3, Setting.Animator.CellHeight/3);
     }
 }
