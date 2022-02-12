@@ -34,6 +34,5 @@ public class Ticker implements ActionListener {
         if(!gameState)return;
         notifyAllObservers();
         Animator.zeichne();
-        
     }
 }

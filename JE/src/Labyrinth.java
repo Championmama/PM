@@ -55,7 +55,7 @@ public class Labyrinth extends Tickable {
             }
         }
 
-        ticker.setState(_R);
+        if(!_R) ticker.setState(false);
         if(!_R) System.out.println("Won");
     }
 }

@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 public class Animator {
-    
+
     public static Setting.Animator settings;
     private static Graphics m_g;
     private static Player m_player;
@@ -15,7 +15,7 @@ public class Animator {
     private static Ghost[] m_ghosts;
     public static boolean Running = true;
 
-    public Animator(Graphics g, Player p , Ghost[] ghosts) {
+    public Animator(Graphics g, Player p, Ghost[] ghosts) {
         m_player = p;
         m_ghosts = ghosts;
         m_g = g;
@@ -66,7 +66,7 @@ public class Animator {
                         drawBG(x, y);
                         m_g.setColor(new Color(0xffb1ff));
                         m_g.fillRect(getWindowXCoord(x),
-                                getWindowYCoord(y) + Setting.Animator.CellHeight / 2-2,
+                                getWindowYCoord(y) + Setting.Animator.CellHeight / 2 - 2,
                                 Setting.Animator.CellWidth, 4);
                         break;
                     default:
@@ -75,7 +75,7 @@ public class Animator {
                 } // end of switch
             } // end of for
         } // end of for
-        for(Ghost _G :m_ghosts) {
+        for (Ghost _G : m_ghosts) {
             _G.draw(m_g);
         }
         m_player.draw(m_g);
@@ -101,10 +101,10 @@ public class Animator {
         drawBG(x, y);
         m_g.setColor(c);
         m_g.fillOval(
-            Setting.Animator.outmargin + 4 + (int) Setting.Animator.CellWidth / 2
+                Setting.Animator.outmargin + 4 + (int) Setting.Animator.CellWidth / 2
                         + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin),
-                        Setting.Animator.outmargin + 27 + (int) Setting.Animator.CellHeight / 2
+                Setting.Animator.outmargin + 27 + (int) Setting.Animator.CellHeight / 2
                         + y * (Setting.Animator.CellHeight + Setting.Animator.inmargin),
-                        Setting.Animator.CellWidth/3, Setting.Animator.CellHeight/3);
+                Setting.Animator.CellWidth / 3, Setting.Animator.CellHeight / 3);
     }
 }

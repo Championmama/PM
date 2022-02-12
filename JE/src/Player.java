@@ -29,7 +29,7 @@ public class Player extends Character {
 
     public void die () {
         lives--;
-        if(lives==0) {
+        if(lives<=0) {
             ticker.setState(false);
             System.out.println("lost");
         } else {

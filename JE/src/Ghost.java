@@ -99,7 +99,7 @@ public class Ghost extends Character {
     }
 
     public void draw(Graphics g) {
-        Animator.drawBG(getX(), getY());
+        
         g.setColor(getColor());
 
         g.fillRect(getWindowXCoord(), getWindowYCoord() + Setting.Animator.CellHeight / 2,
