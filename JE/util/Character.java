@@ -4,7 +4,7 @@ import util.Position.M_Axis;
 
 
 public class Character {
-    private Position m_Position;
+    protected Position m_Position;
 
     //Prefered Option
     public Character(Position StartPosition) {
@@ -18,7 +18,7 @@ public class Character {
     public void move(M_Axis direction, boolean fw) {
         m_Position.move(direction, fw);
     }
-    public void setPosition(Position pos) {
+    protected void setPosition(Position pos) {
         m_Position = pos;
     }
     public Position getPosition() {
@@ -38,7 +38,7 @@ public class Character {
         return Setting.Animator.outmargin + 30 + getY() * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
-    public class ret {
+    protected class ret {
         public M_Axis Axis;
         public boolean fw;
 
@@ -48,7 +48,7 @@ public class Character {
         }
     }
 
-    public ret convertdirectionBack(int facingangle) {
+    protected ret convertdirectionBack(int facingangle) {
         ret _R;
         switch (facingangle) {
             case 0:
