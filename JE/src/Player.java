@@ -30,7 +30,8 @@ public class Player extends Character {
     public void die () {
         lives--;
         if(lives==0) {
-            Animator.Running = false;
+            ticker.setState(false);
+            System.out.println("lost");
         } else {
             setPosition(new Position(5,5));
         }
@@ -68,12 +69,10 @@ public class Player extends Character {
             case 3:
                 Labyrinth.currenLabyrinth.setBesetzung(getX(), getY(), 0);
                 eatpoint();
-                Labyrinth.currenLabyrinth.checkwin();
                 break;
             case 4:
                 Labyrinth.currenLabyrinth.setBesetzung(getX(), getY(), 0);
                 eatinv();
-                Labyrinth.currenLabyrinth.checkwin();
                 break;
             default:
                 GamePoints += Setting.Elements.Points.empty;
@@ -146,5 +145,11 @@ public class Player extends Character {
             }
         }
         return _C;
+    }
+
+
+    @Override 
+    public void tick() {
+        move();
     }
 }

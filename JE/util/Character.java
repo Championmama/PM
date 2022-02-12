@@ -3,11 +3,12 @@ import src.Setting;
 import util.Position.M_Axis;
 
 
-public class Character {
+public class Character extends Tickable{
     protected Position m_Position;
 
     //Prefered Option
     public Character(Position StartPosition) {
+        super();
         m_Position=StartPosition;
     }
 
@@ -69,5 +70,10 @@ public class Character {
                 break;
         }
         return _R;
+    }
+
+    @Override
+    public void tick() {
+        System.out.println("missing Implementation for tick() function");
     }
 }

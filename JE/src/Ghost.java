@@ -17,8 +17,9 @@ public class Ghost extends Character {
     public Ghost(Position StartPosition, GHOSTTYPES GhostColor, Player player) {
         super(StartPosition);
         Type = GhostColor;
-        target = player.getPosition();
-        fairnessTimer = Setting.FaitnessTimer;
+        target = player;
+        targetPosition = player.getPosition();
+        fairnessTimer = Setting.FaitnessTimer/2;
     }
 
     private Color getColor() {
@@ -40,14 +41,16 @@ public class Ghost extends Character {
         }
     }
 
-    private Position target;
+    private Player target;
+    private Position targetPosition;
 
     public void setTarget(Position s) {
-        target = s;
+        targetPosition = s;
     }
 
     public void die() {
-        target = Setting.Elements.GhostSpawns.PinkySpawn;
+        targetPosition = Setting.Elements.GhostSpawns.PinkySpawn;
+        fairnessTimer = Setting.FaitnessTimer;
     }
 
     private int fairnessTimer;
@@ -57,10 +60,11 @@ public class Ghost extends Character {
             fairnessTimer--;
             return;
         }
+        targetPosition=target.getPosition();
         int directionR;
 
-        float dx = target.get(M_Axis.X) - getX() + (float)(Math.random()-0.5)*5;
-        float dy = target.get(M_Axis.Y) - getY() + (float)(Math.random()-0.5)*5;
+        float dx = targetPosition.get(M_Axis.X) - getX() + (float)(Math.random()-0.5)*5;
+        float dy = targetPosition.get(M_Axis.Y) - getY() + (float)(Math.random()-0.5)*5;
         if (Math.abs(dx) > Math.abs(dy)) {
             if (dx >= 0) {
                 directionR = 0;
@@ -111,6 +115,14 @@ public class Ghost extends Character {
         g.fillRect(getWindowXCoord() + 4 * Setting.Animator.CellWidth / 5,
                 getWindowYCoord() + 3 * Setting.Animator.CellHeight / 4, Setting.Animator.CellWidth / 5,
                 Setting.Animator.CellHeight / 4);
+    }
+
+    @Override 
+    public void tick() {
+        move();
+        if(getX() == target.getX() && getY() == target.getY()) {
+            if(target.invincible()) {die();} else target.die();
+        }
     }
 
 }

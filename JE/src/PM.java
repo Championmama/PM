@@ -15,6 +15,7 @@ import util.Position;
 
 public class PM extends JFrame {
   public static JButton StartButton;
+  public static Ticker ticker;
   private Timer timer;
   private JTextField eingabe = new JTextField();
   private Graphics g;
@@ -54,8 +55,9 @@ public class PM extends JFrame {
       timer.setRepeats(true);
       timer.start();
       g = getGraphics();
+      ticker = new Ticker();
       startGame();
-      timer.addActionListener(new Ticker(player, m_ghosts));
+      timer.addActionListener(ticker);
     }
   }
   private void startGame() {

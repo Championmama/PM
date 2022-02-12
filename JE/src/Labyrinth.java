@@ -1,6 +1,8 @@
 package src;
 
-public class Labyrinth {
+import util.Tickable;
+
+public class Labyrinth extends Tickable {
     public static Labyrinth currenLabyrinth;
     private static int[][] m_Besetzung = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1 },
             { 1, 3, 0, 3, 3, 3, 3, 0, 3, 0, 0, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 1 },
@@ -30,21 +32,6 @@ public class Labyrinth {
         
     }
 
-    public void checkwin() {
-        boolean _R = false;
-        for (int[] is : m_Besetzung) {
-            for (int i : is) {
-                if (i == 2 || i == 3) {
-                    _R = true;
-                }
-            }
-        }
-
-        Animator.Running = _R;
-        if(!_R) System.out.println("Won");
-
-    }
-
     public void setActive() {
         currenLabyrinth = this;
     }
@@ -55,5 +42,20 @@ public class Labyrinth {
 
     public int getBesetzung(int x, int y) {
         return m_Besetzung[y][x];
+    }
+
+    @Override
+    public void tick() {
+        boolean _R = false;
+        for (int[] is : m_Besetzung) {
+            for (int i : is) {
+                if (i == 2 || i == 3) {
+                    _R = true;
+                }
+            }
+        }
+
+        ticker.setState(_R);
+        if(!_R) System.out.println("Won");
     }
 }
