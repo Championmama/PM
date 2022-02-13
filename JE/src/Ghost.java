@@ -2,12 +2,13 @@ package src;
 
 import util.Character;
 import util.Position;
+import util.Tickable;
 import util.Position.M_Axis;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Ghost extends Character {
+public class Ghost extends Character implements Tickable{
     public static enum GHOSTTYPES {
         PINKY, GREENY, LIMY, STRETCHY
     }

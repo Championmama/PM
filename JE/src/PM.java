@@ -47,26 +47,34 @@ public class PM extends JFrame {
   private class ButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-      StartButton.setVisible(false);
+      startGame();
+    }
+  }
+  private void startGame() {
+    StartButton.setVisible(false);
       StartButton.setBounds(0, 0, 1, 1);
-      StartButton.removeActionListener(this);
 
       timer = new Timer((int)(1000/Setting.TickRate), null);
       timer.setRepeats(true);
       timer.start();
       g = getGraphics();
       ticker = new Ticker();
-      startGame();
       timer.addActionListener(ticker);
-    }
-  }
-  private void startGame() {
+
+
+
     player = new Player(Setting.StartPosition);
 
     Ghost Pinky = new Ghost(      new Position(1, 1),GHOSTTYPES.PINKY, player);
     Ghost Greeny = new Ghost(     new Position(1, 2), GHOSTTYPES.GREENY, player);
     Ghost Limy = new Ghost(       new Position(1, 3), GHOSTTYPES.LIMY, player);
     Ghost Stretchy = new Ghost(   new Position(1, 4), GHOSTTYPES.STRETCHY, player);
+
+    ticker.attach(player);
+    ticker.attach(Pinky);
+    ticker.attach(Greeny);
+    ticker.attach(Limy);
+    ticker.attach(Stretchy);
 
     Ghost[] ghosts = {Pinky, Greeny, Limy, Stretchy};
     m_ghosts = ghosts;
@@ -78,6 +86,7 @@ public class PM extends JFrame {
 
 
     new Animator(g, player, ghosts);
+    ticker.attach(Labyrinth.currenLabyrinth);
     System.out.println("start");
     FocusManager.getCurrentManager().focusNextComponent(this);
   }

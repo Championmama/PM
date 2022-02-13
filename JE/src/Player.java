@@ -2,12 +2,13 @@ package src;
 
 import util.Character;
 import util.Position;
+import util.Tickable;
 import util.Position.M_Axis;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Player extends Character {
+public class Player extends Character implements Tickable {
     private int mundState;
     private int facingangle;// in PI/2 radians 0:right; 1:down; 2:left; 3:up
     private int lives;

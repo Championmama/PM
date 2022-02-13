@@ -2,7 +2,7 @@ package src;
 
 import util.Tickable;
 
-public class Labyrinth extends Tickable {
+public class Labyrinth implements Tickable {
     public static Labyrinth currenLabyrinth;
     private static int[][] m_Besetzung = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1 },
             { 1, 3, 0, 3, 3, 3, 3, 0, 3, 0, 0, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 1 },
