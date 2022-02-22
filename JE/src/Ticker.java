@@ -7,11 +7,12 @@ import java.util.List;
 import util.Tickable;
 
 public class Ticker implements ActionListener {
-
+    private Animator animator;
     private List<Tickable> tickables = new ArrayList<Tickable>();
     private boolean gameState = false;
 
-    public Ticker() {
+    public Ticker(Animator anim) {
+        animator = anim;
         this.gameState = true;
     }
 
@@ -19,7 +20,7 @@ public class Ticker implements ActionListener {
         tickables.add(tickable);
     }
 
-    public void notifyAllObservers() {
+    public void benachrichtige() {
         for(Tickable t : tickables) {
             t.tick();
         }
@@ -32,7 +33,7 @@ public class Ticker implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(!gameState)return;
-        notifyAllObservers();
-        Animator.zeichne();
+        benachrichtige();
+        animator.zeichne();
     }
 }

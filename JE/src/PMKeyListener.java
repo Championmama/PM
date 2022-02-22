@@ -32,7 +32,6 @@ public class PMKeyListener implements KeyListener {
                 break;
 
         }
-        //Animator.zeichne();
     }
 
     @Override

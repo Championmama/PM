@@ -8,12 +8,12 @@ import javax.swing.ImageIcon;
 public class Animator {
 
     public static Setting.Animator settings;
-    private static Graphics m_g;
-    private static Player m_player;
-    private static ImageIcon img;
-    private static Labyrinth lab;
-    private static Ghost[] m_ghosts;
-    public static boolean Running = true;
+    private Graphics m_g;
+    private Player m_player;
+    private ImageIcon img;
+    private Labyrinth lab;
+    private Ghost[] m_ghosts;
+    public boolean Running = true;
 
     public Animator(Graphics g, Player p, Ghost[] ghosts) {
         m_player = p;
@@ -24,7 +24,7 @@ public class Animator {
         lab.setActive();
     }
 
-    public static void zeichne() {
+    public void zeichne() {
         for (int x = 0; x < 30; x++) {
             for (int y = 0; y < 20; y++) {
                 switch (lab.getBesetzung(x, y)) {
@@ -81,15 +81,15 @@ public class Animator {
         m_player.draw(m_g);
     }
 
-    public static int getWindowXCoord(int x) {
+    public int getWindowXCoord(int x) {
         return Setting.Animator.outmargin + 7 + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin);
     }
 
-    public static int getWindowYCoord(int y) {
+    public int getWindowYCoord(int y) {
         return Setting.Animator.outmargin + 30 + y * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
-    public static void drawBG(int x, int y) {
+    public void drawBG(int x, int y) {
         m_g.setColor(new Color(0x404040));
         m_g.fillRect(
                 getWindowXCoord(x),
@@ -97,7 +97,7 @@ public class Animator {
                 Setting.Animator.CellWidth, Setting.Animator.CellHeight);
     }
 
-    private static void drawPointwBG(int x, int y, Color c) {
+    private void drawPointwBG(int x, int y, Color c) {
         drawBG(x, y);
         m_g.setColor(c);
         m_g.fillOval(

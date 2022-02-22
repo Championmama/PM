@@ -50,44 +50,44 @@ public class PM extends JFrame {
       startGame();
     }
   }
+
   private void startGame() {
     StartButton.setVisible(false);
-      StartButton.setBounds(0, 0, 1, 1);
+    StartButton.setBounds(0, 0, 1, 1);
 
-      timer = new Timer((int)(1000/Setting.TickRate), null);
-      timer.setRepeats(true);
-      timer.start();
-      g = getGraphics();
-      ticker = new Ticker();
-      timer.addActionListener(ticker);
-
-
-
+    timer = new Timer((int) (1000 / Setting.TickRate), null);
+    timer.setRepeats(true);
+    g = getGraphics();
+    
+    //Definiere alle Objekte
     player = new Player(Setting.StartPosition);
 
-    Ghost Pinky = new Ghost(      new Position(1, 1),GHOSTTYPES.PINKY, player);
-    Ghost Greeny = new Ghost(     new Position(1, 2), GHOSTTYPES.GREENY, player);
-    Ghost Limy = new Ghost(       new Position(1, 3), GHOSTTYPES.LIMY, player);
-    Ghost Stretchy = new Ghost(   new Position(1, 4), GHOSTTYPES.STRETCHY, player);
+    Ghost Pinky = new Ghost(new Position(1, 1), GHOSTTYPES.PINKY, player);
+    Ghost Greeny = new Ghost(new Position(1, 2), GHOSTTYPES.GREENY, player);
+    Ghost Limy = new Ghost(new Position(1, 3), GHOSTTYPES.LIMY, player);
+    Ghost Stretchy = new Ghost(new Position(1, 4), GHOSTTYPES.STRETCHY, player);
 
-    ticker.attach(player);
-    ticker.attach(Pinky);
-    ticker.attach(Greeny);
-    ticker.attach(Limy);
-    ticker.attach(Stretchy);
-
-    Ghost[] ghosts = {Pinky, Greeny, Limy, Stretchy};
+    Ghost[] ghosts = { Pinky, Greeny, Limy, Stretchy };
     m_ghosts = ghosts;
-
 
     eingabe.addKeyListener(new PMKeyListener(player));
     eingabe.setBounds(0, 0, 1, 1);
     add(eingabe);
 
+    Animator anim = new Animator(g, player, ghosts);
 
-    new Animator(g, player, ghosts);
+    ticker = new Ticker(anim);
     ticker.attach(Labyrinth.currenLabyrinth);
-    System.out.println("start");
+    ticker.attach(player);
+    ticker.attach(Pinky);
+    ticker.attach(Greeny);
+    ticker.attach(Limy);
+    ticker.attach(Stretchy);
+    timer.addActionListener(ticker);
+
     FocusManager.getCurrentManager().focusNextComponent(this);
+    
+    System.out.println("start");
+    timer.start();
   }
 }
