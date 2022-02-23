@@ -14,18 +14,13 @@ public class Player extends Character implements Tickable {
     private int lives;
     public int GamePoints;
     private int invTimer = 0;
+    private SoundManager sManager;
 
-    public Player(Position pos) {
+    public Player(Position pos, SoundManager sm) {
         super(pos);
         lives = Setting.Lives;
         GamePoints = 0;
-    }
-
-    public Player(int x, int y) {
-        super(new Position(x, y));
-        lives = Setting.Lives;
-        GamePoints = 0;
-        
+        sManager = sm;
     }
 
     public void die () {
@@ -33,6 +28,7 @@ public class Player extends Character implements Tickable {
         if(lives<=0) {
             ticker.setState(false);
             System.out.println("lost");
+            sManager.stop();
         } else {
             setPosition(new Position(5,5));
         }

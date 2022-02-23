@@ -50,7 +50,7 @@ public class Ghost extends Character implements Tickable{
     }
 
     public void die() {
-        targetPosition = Setting.Elements.GhostSpawns.PinkySpawn;
+        targetPosition = Setting.Elements.GhostSpawns.Spawn[Type.ordinal()];
         fairnessTimer = Setting.FaitnessTimer;
     }
 

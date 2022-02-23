@@ -13,7 +13,13 @@ public class Setting {
 
     public static class Elements {
         public static final class GhostSpawns {
-            public static final Position PinkySpawn = new Position(8, 10);
+            public static final Position[] Spawn = {
+                new Position(8, 10),
+                new Position(10, 15),
+                new Position(20, 8),
+                new Position(5, 10)
+            };
+
         }
         public static boolean E_Cherry = true;
         public static boolean E_Point = true;

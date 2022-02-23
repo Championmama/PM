@@ -1,8 +1,6 @@
 package src;
 
 import java.awt.Graphics;
-import java.awt.event.*;
-
 import javax.swing.FocusManager;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +9,6 @@ import javax.swing.Timer;
 import javax.swing.plaf.InsetsUIResource;
 
 import src.Ghost.GHOSTTYPES;
-import util.Position;
 
 public class PM extends JFrame {
   public static JButton StartButton;
@@ -24,7 +21,7 @@ public class PM extends JFrame {
 
   public PM() {
     super();
-
+    this.pack();
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     int frameWidth = 700;
     int frameHeight = 500;
@@ -39,33 +36,27 @@ public class PM extends JFrame {
     StartButton.setMargin(new InsetsUIResource(4, 4, 4, 4));
     StartButton.setBounds(frameWidth / 2 - 50, frameHeight / 2 - 15, 100, 30);
     StartButton.setVisible(true);
-    StartButton.addActionListener(new ButtonListener());
+    StartButton.addActionListener(new ButtonListener(this));
     add(StartButton);
 
   }
 
-  private class ButtonListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      startGame();
-    }
-  }
-
-  private void startGame() {
+  void startGame() {
     StartButton.setVisible(false);
     StartButton.setBounds(0, 0, 1, 1);
 
     timer = new Timer((int) (1000 / Setting.TickRate), null);
     timer.setRepeats(true);
     g = getGraphics();
-    
-    //Definiere alle Objekte
-    player = new Player(Setting.StartPosition);
 
-    Ghost Pinky = new Ghost(new Position(1, 1), GHOSTTYPES.PINKY, player);
-    Ghost Greeny = new Ghost(new Position(1, 2), GHOSTTYPES.GREENY, player);
-    Ghost Limy = new Ghost(new Position(1, 3), GHOSTTYPES.LIMY, player);
-    Ghost Stretchy = new Ghost(new Position(1, 4), GHOSTTYPES.STRETCHY, player);
+    // Definiere alle Objekte
+    SoundManager sManager = new SoundManager(this);
+    player = new Player(Setting.StartPosition, sManager);
+
+    Ghost Pinky = new Ghost(Setting.Elements.GhostSpawns.Spawn[0], GHOSTTYPES.PINKY, player);
+    Ghost Greeny = new Ghost(Setting.Elements.GhostSpawns.Spawn[1], GHOSTTYPES.GREENY, player);
+    Ghost Limy = new Ghost(Setting.Elements.GhostSpawns.Spawn[2], GHOSTTYPES.LIMY, player);
+    Ghost Stretchy = new Ghost(Setting.Elements.GhostSpawns.Spawn[3], GHOSTTYPES.STRETCHY, player);
 
     Ghost[] ghosts = { Pinky, Greeny, Limy, Stretchy };
     m_ghosts = ghosts;
@@ -86,8 +77,9 @@ public class PM extends JFrame {
     timer.addActionListener(ticker);
 
     FocusManager.getCurrentManager().focusNextComponent(this);
-    
+
     System.out.println("start");
     timer.start();
   }
+
 }
