@@ -7,6 +7,7 @@ import javax.sound.sampled.*;
 
 public class SoundManager {
     private Clip c;
+
     SoundManager(PM pm) {
         try {
             // ------------------------------------------------
@@ -21,14 +22,14 @@ public class SoundManager {
             Clip clip = AudioSystem.getClip();
             // Open audio clip and load samples from the audio input stream.
             clip.open(audioIn);
-            FloatControl gainControl = 
-    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(Setting.MusicVolume-100.0f);
             clip.start();
 
-            //---------------------------------------
+            // ---------------------------------------
             System.out.println("started Audio");
-            c=clip;
-            
+            c = clip;
+
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
