@@ -21,6 +21,8 @@ public class SoundManager {
             Clip clip = AudioSystem.getClip();
             // Open audio clip and load samples from the audio input stream.
             clip.open(audioIn);
+            FloatControl gainControl = 
+    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             clip.start();
 
             //---------------------------------------
