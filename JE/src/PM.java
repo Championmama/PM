@@ -17,6 +17,7 @@ public class PM extends JFrame {
   private JTextField eingabe = new JTextField();
   private Graphics g;
   private Player player;
+  public static String Point_Text;
   Ghost[] m_ghosts;
 
   public PM() {

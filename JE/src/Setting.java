@@ -21,13 +21,8 @@ public class Setting {
             };
 
         }
-        public static boolean E_Cherry = true;
-        public static boolean E_Point = true;
-        public static boolean E_inv = true;
-        public static boolean E_Wall = true;
-        public static boolean E_Door = true;
 
-
+        
         public static class Points {
             public static final int Cherry = 100;
             public static final int Point = 10;

@@ -75,6 +75,7 @@ public class Player extends Character implements Tickable {
                 GamePoints += Setting.Elements.Points.empty;
                 // haben bereits bewegt
         }
+        PM.Point_Text=Integer.toString(GamePoints);
         if (invTimer > 0) {
             invTimer--;
         }
