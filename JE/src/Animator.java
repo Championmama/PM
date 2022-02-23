@@ -7,11 +7,10 @@ import javax.swing.ImageIcon;
 
 public class Animator {
 
-    public static Setting.Animator settings;
     private Graphics m_g;
     private Player m_player;
-    private ImageIcon img;
-    private Labyrinth lab;
+    private ImageIcon m_img;
+    private Labyrinth m_lab;
     private Ghost[] m_ghosts;
     public boolean Running = true;
 
@@ -19,15 +18,17 @@ public class Animator {
         m_player = p;
         m_ghosts = ghosts;
         m_g = g;
-        img = new ImageIcon("assets/cherry.jpg");
-        lab = new Labyrinth();
-        lab.setActive();
+        //lädt Textur \/
+        m_img = new ImageIcon("assets/cherry.jpg");
+
+        m_lab = new Labyrinth();
+        m_lab.setActive();
     }
 
     public void zeichne() {
         for (int x = 0; x < 30; x++) {
             for (int y = 0; y < 20; y++) {
-                switch (lab.getBesetzung(x, y)) {
+                switch (m_lab.getBesetzung(x, y)) {
                     case 1: // Wall
                         m_g.setColor(Color.black);
                         m_g.fillRect(
@@ -50,17 +51,17 @@ public class Animator {
                         break;
                     case 2: // Cherry
                         drawBG(x, y);
-                        if (img.getImage() == null)
+                        if (m_img.getImage() == null)
                             System.err.println("image not loaded");
-                        m_g.drawImage(img.getImage(),
+                        m_g.drawImage(m_img.getImage(),
                                 getWindowXCoord(x),
                                 getWindowYCoord(y), null);
                         break;
                     case 3: // Point
-                        drawPointwBG(x, y, Color.orange);
+                        drawPointwithBG(x, y, Color.orange);
                         break;
                     case 4:// inv
-                        drawPointwBG(x, y, Color.white);
+                        drawPointwithBG(x, y, Color.white);
                         break;
                     case 5:// door
                         drawBG(x, y);
@@ -75,6 +76,7 @@ public class Animator {
                 } // end of switch
             } // end of for
         } // end of for
+
         for (Ghost _G : m_ghosts) {
             _G.draw(m_g);
         }
@@ -101,7 +103,7 @@ public class Animator {
                 Setting.Animator.CellWidth, Setting.Animator.CellHeight);
     }
 
-    private void drawPointwBG(int x, int y, Color c) {
+    private void drawPointwithBG(int x, int y, Color c) {
         drawBG(x, y);
         m_g.setColor(c);
         m_g.fillOval(

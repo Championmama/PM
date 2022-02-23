@@ -16,7 +16,9 @@
 * [Util](#Utilities)
 ---
 
-### Animator
+### Animator  
+Klasse ist dazu da, das Labyrinth zu malen und die [Java] `draw()`-Methode der Klassen `Ghost` und `Player` aufzurufen.
+
 ---
 ### ButtonListener
 ---
