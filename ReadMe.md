@@ -22,7 +22,7 @@
 
 ## Todo
 
-* Animator als Observer Pattern
+* eigene Musik
 * GUI, HUB
   * Einstellungen
   * besserer Score

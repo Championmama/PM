@@ -1,19 +1,21 @@
 package src;
 
 import java.awt.event.*;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
 import util.Tickable;
 
 public class Ticker implements ActionListener {
-    private Animator animator;
     private List<Tickable> tickables = new ArrayList<Tickable>();
-    private boolean gameState = false;
+    private boolean m_gameState = false;
+    private Graphics m_g;
 
-    public Ticker(Animator anim) {
-        animator = anim;
-        this.gameState = true;
+    public Ticker(Graphics g) {
+
+        this.m_gameState = true;
+        this.m_g = g;
     }
 
     public void attach (Tickable tickable) {
@@ -24,16 +26,18 @@ public class Ticker implements ActionListener {
         for(Tickable t : tickables) {
             t.tick();
         }
+        for(Tickable t : tickables) {
+            t.draw(m_g);
+        }
     }
 
     public void setState(boolean state) {
-        this.gameState = state;
+        this.m_gameState = state;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!gameState)return;
+        if(!m_gameState)return;
         benachrichtige();
-        animator.zeichne();
     }
 }

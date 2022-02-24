@@ -98,7 +98,7 @@ public class Ghost extends Character implements Tickable{
             }
         }
     }
-
+    @Override
     public void draw(Graphics g) {
         
         g.setColor(getColor());

@@ -52,6 +52,9 @@ public class PM extends JFrame {
 
     // Definiere alle Objekte
     SoundManager sManager = new SoundManager(this);
+
+    Labyrinth lab = new Labyrinth();
+
     player = new Player(Setting.StartPosition, sManager);
 
     Ghost Pinky = new Ghost(Setting.Elements.GhostSpawns.Spawn[0], GHOSTTYPES.PINKY, player);
@@ -66,10 +69,8 @@ public class PM extends JFrame {
     eingabe.setBounds(0, 0, 1, 1);
     add(eingabe);
 
-    Animator anim = new Animator(g, player, ghosts);
-
-    ticker = new Ticker(anim);
-    ticker.attach(Labyrinth.currenLabyrinth);
+    ticker = new Ticker(g);
+    ticker.attach(lab);
     ticker.attach(player);
     ticker.attach(Pinky);
     ticker.attach(Greeny);

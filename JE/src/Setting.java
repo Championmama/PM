@@ -10,7 +10,12 @@ public class Setting {
     public static final int Lives = 3;
     public static final int invTimer = 20; //in Ticks
     public static final int FaitnessTimer = 10;
+
     public static final float MusicVolume = 90.0f;
+    public static final String MusicFilePath = "BGMusic.wav";
+
+    public static final int height = 20;
+    public static final int width = 30;
 
     public static class Elements {
         public static final class GhostSpawns {

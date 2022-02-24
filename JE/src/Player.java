@@ -20,6 +20,7 @@ public class Player extends Character implements Tickable {
         super(pos);
         lives = Setting.Lives;
         GamePoints = 0;
+        PM.Point_Text="";
         sManager = sm;
     }
 

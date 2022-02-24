@@ -16,7 +16,7 @@ public class SoundManager {
 
             // Open an audio input stream.
             URL url = this.getClass().getClassLoader()
-                    .getResource("Soviet_Union_national_anthem__instrumental___1977.oga.wav");
+                    .getResource("assets/" + Setting.MusicFilePath);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
             // Get a sound clip resource.
             Clip clip = AudioSystem.getClip();

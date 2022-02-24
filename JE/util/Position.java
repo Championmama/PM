@@ -1,6 +1,5 @@
 package util;
 
-import src.Labyrinth;
 import src.Setting;
 
 public class Position {
@@ -44,14 +43,14 @@ public class Position {
     }
 
     public void move(M_Axis direction, boolean fw) {
-        if (m_x == Labyrinth.m_width-1 && direction == M_Axis.X && fw) {
-            m_x = !Setting.Loop?Labyrinth.m_width-1:0;
+        if (m_x == Setting.width-1 && direction == M_Axis.X && fw) {
+            m_x = !Setting.Loop?Setting.width-1:0;
         } else if (m_x == 0 && direction == M_Axis.X && !fw) {
-            m_x = Setting.Loop?Labyrinth.m_width-1:0;
-        } else if (m_y == Labyrinth.m_height-1 && direction == M_Axis.Y && !fw) {
-            m_y = !Setting.Loop?Labyrinth.m_height-1:0;;
+            m_x = Setting.Loop?Setting.width-1:0;
+        } else if (m_y == Setting.height-1 && direction == M_Axis.Y && !fw) {
+            m_y = !Setting.Loop?Setting.height-1:0;;
         } else if (m_y == 0 && direction == M_Axis.Y && fw) {
-            m_y = Setting.Loop?Labyrinth.m_height-1:0;
+            m_y = Setting.Loop?Setting.height-1:0;
         } else {
             switch (direction) {
                 case X:
