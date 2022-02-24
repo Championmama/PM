@@ -4,32 +4,27 @@ import util.Position.M_Axis;
 
 
 public class Character{
-    protected Position m_Position;
+    protected Position p_Position;
 
-    //Prefered Option
     public Character(Position StartPosition) {
         super();
-        m_Position=StartPosition;
-    }
-
-    public Character(int x, int y) {
-        new Character(new Position(x, y));
+        p_Position=StartPosition;
     }
 
     public void move(M_Axis direction, boolean fw) {
-        m_Position.move(direction, fw);
+        p_Position.move(direction, fw);
     }
     protected void setPosition(Position pos) {
-        m_Position = pos;
+        p_Position = pos;
     }
     public Position getPosition() {
-        return m_Position;
+        return p_Position;
     }
     public int getX() {
-        return m_Position.get(M_Axis.X);
+        return p_Position.get(M_Axis.X);
     }
     public int getY() {
-        return m_Position.get(M_Axis.Y);
+        return p_Position.get(M_Axis.Y);
     }
 
     public int getWindowXCoord() {

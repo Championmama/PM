@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 
 class ButtonListener implements ActionListener {
     
-    private final PM pm;
+    private final PM m_pm;
     ButtonListener(PM pm) {
-      this.pm = pm;
+      this.m_pm = pm;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      this.pm.startGame();
+      this.m_pm.startGame();
     }
   }

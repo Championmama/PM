@@ -18,9 +18,9 @@ public class Ghost extends Character implements Tickable{
     public Ghost(Position StartPosition, GHOSTTYPES GhostColor, Player player) {
         super(StartPosition);
         Type = GhostColor;
-        target = player;
-        targetPosition = player.getPosition();
-        fairnessTimer = Setting.FaitnessTimer/2;
+        m_target = player;
+        m_targetPosition = player.getPosition();
+        m_fairnessTimer = Setting.FaitnessTimer/2;
     }
 
     private Color getColor() {
@@ -42,30 +42,30 @@ public class Ghost extends Character implements Tickable{
         }
     }
 
-    private Player target;
-    private Position targetPosition;
+    private Player m_target;
+    private Position m_targetPosition;
 
     public void setTarget(Position s) {
-        targetPosition = s;
+        m_targetPosition = s;
     }
 
     public void die() {
-        targetPosition = Setting.Elements.GhostSpawns.Spawn[Type.ordinal()];
-        fairnessTimer = Setting.FaitnessTimer;
+        m_targetPosition = Setting.Elements.GhostSpawns.Spawn[Type.ordinal()];
+        m_fairnessTimer = Setting.FaitnessTimer;
     }
 
-    private int fairnessTimer;
+    private int m_fairnessTimer;
 
     public void move() {
-        if(fairnessTimer > 0) {
-            fairnessTimer--;
+        if(m_fairnessTimer > 0) {
+            m_fairnessTimer--;
             return;
         }
-        targetPosition=target.getPosition();
+        m_targetPosition=m_target.getPosition();
         int directionR;
 
-        float dx = targetPosition.get(M_Axis.X) - getX() + (float)(Math.random()-0.5)*5;
-        float dy = targetPosition.get(M_Axis.Y) - getY() + (float)(Math.random()-0.5)*5;
+        float dx = m_targetPosition.get(M_Axis.X) - getX() + (float)(Math.random()-0.5)*5;
+        float dy = m_targetPosition.get(M_Axis.Y) - getY() + (float)(Math.random()-0.5)*5;
         if (Math.abs(dx) > Math.abs(dy)) {
             if (dx >= 0) {
                 directionR = 0;
@@ -121,8 +121,8 @@ public class Ghost extends Character implements Tickable{
     @Override 
     public void tick() {
         move();
-        if(getX() == target.getX() && getY() == target.getY()) {
-            if(target.invincible()) {die();} else target.die();
+        if(getX() == m_target.getX() && getY() == m_target.getY()) {
+            if(m_target.invincible()) {die();} else m_target.die();
         }
     }
 

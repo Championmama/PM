@@ -77,9 +77,11 @@ public class Animator {
             } // end of for
         } // end of for
 
+        //for each loop
         for (Ghost _G : m_ghosts) {
             _G.draw(m_g);
         }
+        
         m_player.draw(m_g);
         m_g.setColor(Color.white);
         m_g.fillRect(650, 10, 50, 50);
@@ -87,22 +89,23 @@ public class Animator {
         m_g.drawString(PM.Point_Text, 650, 50);
     }
 
-    public int getWindowXCoord(int x) {
+    private int getWindowXCoord(int x) {
         return Setting.Animator.outmargin + 7 + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin);
     }
 
-    public int getWindowYCoord(int y) {
+    private int getWindowYCoord(int y) {
         return Setting.Animator.outmargin + 30 + y * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
-    public void drawBG(int x, int y) {
+    //malt den Hintergrund
+    private void drawBG(int x, int y) {
         m_g.setColor(new Color(0x404040));
         m_g.fillRect(
                 getWindowXCoord(x),
                 getWindowYCoord(y),
                 Setting.Animator.CellWidth, Setting.Animator.CellHeight);
     }
-
+    // malt Hintergrund und dann den Punkt mit Farbe als Parameter
     private void drawPointwithBG(int x, int y, Color c) {
         drawBG(x, y);
         m_g.setColor(c);
