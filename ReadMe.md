@@ -22,15 +22,6 @@
 
 ---
 
-## Todo
-
-* eigene Musik
-* GUI, besseres HUD
-  * Einstellungen
-  * besserer Score
-
----
-
 ## Conventions
 
 * Präfix
