@@ -127,7 +127,7 @@ public class Labyrinth implements Tickable {
         m_g.setColor(Color.black);
         m_g.drawString(PM.Point_Text, 650, 50);
     }
-
+    // rellativ zu Bildschirmkoordinaten
     private int getWindowXCoord(int x) {
         return Setting.Animator.outmargin + 7 + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin);
     }

@@ -1,6 +1,6 @@
 package util;
 import src.Setting;
-import util.Position.M_Axis;
+import util.Position.M_AXIS;
 
 
 public class Character{
@@ -11,9 +11,10 @@ public class Character{
         p_Position=StartPosition;
     }
 
-    public void move(M_Axis direction, boolean fw) {
+    public void move(M_AXIS direction, boolean fw) {
         p_Position.move(direction, fw);
     }
+    
     protected void setPosition(Position pos) {
         p_Position = pos;
     }
@@ -21,10 +22,10 @@ public class Character{
         return p_Position;
     }
     public int getX() {
-        return p_Position.get(M_Axis.X);
+        return p_Position.get(M_AXIS.X);
     }
     public int getY() {
-        return p_Position.get(M_Axis.Y);
+        return p_Position.get(M_AXIS.Y);
     }
 
     public int getWindowXCoord() {
@@ -34,34 +35,34 @@ public class Character{
         return Setting.Animator.outmargin + 30 + getY() * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
-    protected class ret {
-        public M_Axis Axis;
+    protected class _Richtung {
+        public M_AXIS Axis;
         public boolean fw;
 
-        public ret(M_Axis A, boolean fw) {
+        public _Richtung(M_AXIS A, boolean fw) {
             Axis = A;
             this.fw = fw;
         }
     }
 
-    protected ret convertdirectionBack(int facingangle) {
-        ret _R;
+    protected _Richtung convertdirectionBack(int facingangle) {
+        _Richtung _R;
         switch (facingangle) {
             case 0:
-                _R = new ret(M_Axis.X, true);
+                _R = new _Richtung(M_AXIS.X, true);
                 break;
             case 1:
-                _R = new ret(M_Axis.Y, false);
+                _R = new _Richtung(M_AXIS.Y, false);
                 break;
             case 2:
-                _R = new ret(M_Axis.X, false);
+                _R = new _Richtung(M_AXIS.X, false);
                 break;
             case 3:
-                _R = new ret(M_Axis.Y, true);
+                _R = new _Richtung(M_AXIS.Y, true);
                 break;
 
             default:
-                _R = new ret(M_Axis.X, true);
+                _R = new _Richtung(M_AXIS.X, true);
                 break;
         }
         return _R;

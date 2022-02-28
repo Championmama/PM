@@ -11,7 +11,7 @@ public class Position {
         m_y = y;
     }
 
-    public void set(M_Axis Axis, int value) {
+    public void set(M_AXIS Axis, int value) {
         switch (Axis) {
             case X:
                 this.m_x = value;
@@ -25,7 +25,7 @@ public class Position {
         }
     }
 
-    public int get(M_Axis Axis) {
+    public int get(M_AXIS Axis) {
         int cPos;
         switch (Axis) {
             case X:
@@ -42,14 +42,14 @@ public class Position {
         return cPos;
     }
 
-    public void move(M_Axis direction, boolean fw) {
-        if (m_x == Setting.width-1 && direction == M_Axis.X && fw) {
+    public void move(M_AXIS direction, boolean fw) {
+        if (m_x == Setting.width-1 && direction == M_AXIS.X && fw) {
             m_x = !Setting.Loop?Setting.width-1:0;
-        } else if (m_x == 0 && direction == M_Axis.X && !fw) {
+        } else if (m_x == 0 && direction == M_AXIS.X && !fw) {
             m_x = Setting.Loop?Setting.width-1:0;
-        } else if (m_y == Setting.height-1 && direction == M_Axis.Y && !fw) {
+        } else if (m_y == Setting.height-1 && direction == M_AXIS.Y && !fw) {
             m_y = !Setting.Loop?Setting.height-1:0;;
-        } else if (m_y == 0 && direction == M_Axis.Y && fw) {
+        } else if (m_y == 0 && direction == M_AXIS.Y && fw) {
             m_y = Setting.Loop?Setting.height-1:0;
         } else {
             switch (direction) {
@@ -64,11 +64,7 @@ public class Position {
         }
     }
 
-    public enum M_Axis {
+    public enum M_AXIS {
         X, Y
-    }
-
-    public void Print() {
-        System.out.println("X: " + m_x + " | y: " + m_y);
     }
 }

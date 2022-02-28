@@ -3,7 +3,7 @@ package src;
 import util.Character;
 import util.Position;
 import util.Tickable;
-import util.Position.M_Axis;
+import util.Position.M_AXIS;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -35,7 +35,7 @@ public class Player extends Character implements Tickable {
         }
     }
 
-    public void turn(M_Axis direction, boolean fw) {
+    public void turn(M_AXIS direction, boolean fw) {
         if (facingangle == convertdirection(direction, fw))
             return;
         //
@@ -48,11 +48,11 @@ public class Player extends Character implements Tickable {
 
 
     public void move() {
-        ret _r = convertdirectionBack(facingangle);
+        _Richtung _r = convertdirectionBack(facingangle);
         move(_r.Axis, _r.fw);
     }
     @Override
-    public void move(M_Axis direction, boolean fw) {
+    public void move(M_AXIS direction, boolean fw) {
         super.move(direction, fw);
         int F = Labyrinth.currenLabyrinth.getBesetzung(getX(), getY());
         switch (F) {
@@ -113,8 +113,8 @@ public class Player extends Character implements Tickable {
         Position eyePosition = getRelativeEyePosition(facingangle);
         g.setColor(Color.black);
         g.fillOval(
-                getWindowXCoord() + eyePosition.get(M_Axis.X) + Setting.Animator.CellWidth / 2 - 2,
-                getWindowYCoord() + eyePosition.get(M_Axis.Y) + Setting.Animator.CellWidth / 2 - 2,
+                getWindowXCoord() + eyePosition.get(M_AXIS.X) + Setting.Animator.CellWidth / 2 - 2,
+                getWindowYCoord() + eyePosition.get(M_AXIS.Y) + Setting.Animator.CellWidth / 2 - 2,
                 4, 4); // Auge
     }
 
@@ -128,16 +128,16 @@ public class Player extends Character implements Tickable {
         return new Position(Augenpositionen[facingangle][0], Augenpositionen[facingangle][1]);
     }
 
-    private int convertdirection(M_Axis direction, boolean fw) {
+    private int convertdirection(M_AXIS direction, boolean fw) {
         int _C = 0;
         if (fw) {
-            if (direction == M_Axis.X) {
+            if (direction == M_AXIS.X) {
                 _C = 0;
             } else {
                 _C = 3;
             }
         } else {
-            if (direction == M_Axis.X) {
+            if (direction == M_AXIS.X) {
                 _C = 2;
             } else {
                 _C = 1;

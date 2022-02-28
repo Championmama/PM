@@ -3,7 +3,7 @@ package src;
 import util.Character;
 import util.Position;
 import util.Tickable;
-import util.Position.M_Axis;
+import util.Position.M_AXIS;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -64,8 +64,8 @@ public class Ghost extends Character implements Tickable{
         m_targetPosition=m_target.getPosition();
         int directionR;
 
-        float dx = m_targetPosition.get(M_Axis.X) - getX() + (float)(Math.random()-0.5)*5;
-        float dy = m_targetPosition.get(M_Axis.Y) - getY() + (float)(Math.random()-0.5)*5;
+        float dx = m_targetPosition.get(M_AXIS.X) - getX() + (float)(Math.random()-0.5)*5;
+        float dy = m_targetPosition.get(M_AXIS.Y) - getY() + (float)(Math.random()-0.5)*5;
         if (Math.abs(dx) > Math.abs(dy)) {
             if (dx >= 0) {
                 directionR = 0;
@@ -81,10 +81,10 @@ public class Ghost extends Character implements Tickable{
         }
         boolean movable = false;
 
-        M_Axis direction;
+        M_AXIS direction;
         boolean fw;
         while (!movable) {
-            ret _S = convertdirectionBack(directionR % 4);
+            _Richtung _S = convertdirectionBack(directionR % 4);
             direction = _S.Axis;
             fw = _S.fw;
             super.move(direction, fw);
@@ -103,11 +103,13 @@ public class Ghost extends Character implements Tickable{
         
         g.setColor(getColor());
 
+        // Körper
         g.fillRect(getWindowXCoord(), getWindowYCoord() + Setting.Animator.CellHeight / 2,
                 Setting.Animator.CellWidth, 3 * Setting.Animator.CellHeight / 8);
         g.fillArc(getWindowXCoord(), getWindowYCoord(), Setting.Animator.CellWidth, Setting.Animator.CellHeight, 0,
                 180);
 
+        // Füße
         g.fillRect(getWindowXCoord(), getWindowYCoord() + 3 * Setting.Animator.CellHeight / 4,
                 Setting.Animator.CellWidth / 5, Setting.Animator.CellHeight / 4);
         g.fillRect(getWindowXCoord() + 2 * Setting.Animator.CellWidth / 5,

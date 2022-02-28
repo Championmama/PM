@@ -11,14 +11,15 @@ import javax.swing.plaf.InsetsUIResource;
 import src.Ghost.GHOSTTYPES;
 
 public class PM extends JFrame {
-  public static JButton StartButton;
+  public static JButton StartButton; //Button zum starten
   public static Ticker ticker;
+  public static String Point_Text;
+
+
   private Timer timer;
   private JTextField eingabe = new JTextField();
   private Graphics g;
   private Player player;
-  public static String Point_Text;
-  Ghost[] m_ghosts;
 
   public PM() {
     super();
@@ -62,9 +63,6 @@ public class PM extends JFrame {
     Ghost Limy = new Ghost(Setting.Elements.GhostSpawns.Spawn[2], GHOSTTYPES.LIMY, player);
     Ghost Stretchy = new Ghost(Setting.Elements.GhostSpawns.Spawn[3], GHOSTTYPES.STRETCHY, player);
 
-    Ghost[] ghosts = { Pinky, Greeny, Limy, Stretchy };
-    m_ghosts = ghosts;
-
     eingabe.addKeyListener(new PMKeyListener(player));
     eingabe.setBounds(0, 0, 1, 1);
     add(eingabe);
@@ -78,6 +76,7 @@ public class PM extends JFrame {
     ticker.attach(Stretchy);
     timer.addActionListener(ticker);
 
+    //Fokus setzen
     FocusManager.getCurrentManager().focusNextComponent(this);
 
     System.out.println("start");
