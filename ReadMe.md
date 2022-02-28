@@ -1,5 +1,7 @@
 # Pacman
 
+private Project of Pacman in java
+
 ## Verzeichnis  
 
 * [conventions](#Convention)
