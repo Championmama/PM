@@ -178,6 +178,14 @@ Einstellungen
 
 ---
 
+### SoundManager
+
+erstellt Sound.
+
+Um Hintergrund-Musik hinzuzufügen, muss in assets eine Datei namens `BGMusic.wav` (oder was auch immer in `Setting.MusicFilePath` ist) hinzugefügt werden, die dann auf Dauerschleife läuft.
+
+---
+
 ## Ticker
 
 folgt dem [Observer](<https://www.tutorialspoint.com/design_pattern/observer_pattern.htm>) pattern:
