@@ -18,7 +18,7 @@
   * [Setting.java](#setting)
   * [Ticker.java](#ticker)
   
-* [Util](#Utilities)
+* [Util](#character)
 
 ---
 
@@ -33,7 +33,7 @@
 
 ## Animation
 
-In der Ticker Klasse wird die `draw()`-Methode den Klassen [`Labyrinth`](#labyrinth), [`Ghost`](#ghost) und [`Player`](#player) aufgerufen
+In der [Ticker](#ticker) Klasse wird die `draw()`-Methode den Klassen [`Labyrinth`](#labyrinth), [`Ghost`](#ghost) und [`Player`](#player) aufgerufen
 
 Zum Schluss wird der __Score__ angezeigt, der unter _PM_ als __PM.Point_Text__ gespeichert wird:
 
@@ -41,6 +41,10 @@ Zum Schluss wird der __Score__ angezeigt, der unter _PM_ als __PM.Point_Text__ g
 m_g.setColor(Color.black);
 m_g.drawString(PM.Point_Text, 650, 50); 
 ```
+
+---
+
+## src
 
 ---
 
@@ -74,14 +78,14 @@ Daraus wird der geringere Wert genommen für die Richtung in M_AXIS und forward.
 
 Aufgabe der Datei ist es auf das Labyrinth und die Felder aufzupassen und diese zu zeichnen.
 
- |Zahl | Objekt|
- |---|---|  
- |0|Leer|  
- |1|Wand|  
- |2|Kirsche|  
- |3|normaler-Punkt|  
- |4|Unbesiegbarkeits-Punkt|  
- |5|Tür für Geister|  
+ |Zahl | Objekt|  |
+ |---|---|---|
+ |0|Leer|  |
+ |1|Wand|  |
+ |2|Kirsche| ![alt](JE/assets/cherry.jpg) |
+ |3|normaler-Punkt|  |
+ |4|Unbesiegbarkeits-Punkt|  |
+ |5|Tür für Geister|  |
 
 Außerdem wird hier noch ein Großteil des HUD gezeichnet.
 
@@ -176,7 +180,7 @@ Einstellungen
 
 ## Ticker
 
-folgt dem Observer pattern:
+folgt dem [Observer](<https://www.tutorialspoint.com/design_pattern/observer_pattern.htm>) pattern:
 
 Es gibt Observer, die wenn sich das Objekt verändert, eine Nachricht bekommen.
 
@@ -204,6 +208,8 @@ Dafür müssen sie eine `draw()` und `tick()`-Methode enthalten, die dann vom Ti
 
 ## Utilities
 
+---
+
 ## Character
 
 Klasse von der sowohl Geister als auch der Player erbt.
@@ -225,4 +231,4 @@ speichert und geht mit der X und Y Koordinate aller Objekte um.
 * `set()`
 * `move()`
 
-Sowie es die M_AXIS benutzt, alse X oder Y-Achse.
+Sowie es die M_AXIS besitzt, alse X oder Y-Achse.

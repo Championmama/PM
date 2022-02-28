@@ -36,6 +36,8 @@ public class SoundManager {
             e.printStackTrace();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.out.println("wrong file Path");
         }
     }
 
