@@ -3,7 +3,8 @@ package src;
 import util.Character;
 import util.Position;
 import util.Tickable;
-import util.Position.M_AXIS;
+import util.Position.AXIS;
+import util.RICHTUNG;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -50,7 +51,6 @@ public class Ghost extends Character implements Tickable{
     }
 
     public void die() {
-        m_targetPosition = Setting.Elements.GhostSpawns.Spawn[Type.ordinal()];
         m_fairnessTimer = Setting.FaitnessTimer;
     }
 
@@ -64,8 +64,8 @@ public class Ghost extends Character implements Tickable{
         m_targetPosition=m_target.getPosition();
         int directionR;
 
-        float dx = m_targetPosition.get(M_AXIS.X) - getX() + (float)(Math.random()-0.5)*5;
-        float dy = m_targetPosition.get(M_AXIS.Y) - getY() + (float)(Math.random()-0.5)*5;
+        float dx = m_targetPosition.get(AXIS.X) - getX() + (float)(Math.random()-0.5)*5;
+        float dy = m_targetPosition.get(AXIS.Y) - getY() + (float)(Math.random()-0.5)*5;
         if (Math.abs(dx) > Math.abs(dy)) {
             if (dx >= 0) {
                 directionR = 0;
@@ -81,16 +81,12 @@ public class Ghost extends Character implements Tickable{
         }
         boolean movable = false;
 
-        M_AXIS direction;
-        boolean fw;
         while (!movable) {
-            _Richtung _S = convertdirectionBack(directionR % 4);
-            direction = _S.Axis;
-            fw = _S.fw;
-            super.move(direction, fw);
+            RICHTUNG _S = convertdirectionBack(directionR % 4);
+            super.move(_S);
             int F = Labyrinth.currenLabyrinth.getBesetzung(getX(), getY());
             if (F == 1) {
-                super.move(direction, !fw);
+                super.move(Position.switchdir(_S));
                 movable = false;
                 directionR++;
             } else {

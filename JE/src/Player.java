@@ -3,7 +3,8 @@ package src;
 import util.Character;
 import util.Position;
 import util.Tickable;
-import util.Position.M_AXIS;
+import util.Position.AXIS;
+import util.RICHTUNG;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -35,30 +36,28 @@ public class Player extends Character implements Tickable {
         }
     }
 
-    public void turn(M_AXIS direction, boolean fw) {
-        if (facingangle == convertdirection(direction, fw))
+    public void turn(RICHTUNG richtung) {
+        if (facingangle == convertdirection(richtung))
             return;
         //
-        facingangle = convertdirection(direction, fw);
-    }
-
-    public void setPosition(Position pos) {
-        super.setPosition(pos);
+        facingangle = convertdirection(richtung);
     }
 
 
     public void move() {
-        _Richtung _r = convertdirectionBack(facingangle);
-        move(_r.Axis, _r.fw);
+        RICHTUNG _r = convertdirectionBack(facingangle);
+        move(_r);
     }
+
     @Override
-    public void move(M_AXIS direction, boolean fw) {
-        super.move(direction, fw);
+    public void move(RICHTUNG richtung) {
+        //erst bewegen, dann gucken, ob dort ein Block war und wir zurück gehen müssen.
+        super.move(richtung);
         int F = Labyrinth.currenLabyrinth.getBesetzung(getX(), getY());
         switch (F) {
             case 1:
             case 5:
-                super.move(direction, !fw);
+                super.move(p_Position.switchdir(richtung));
                 break;
             case 2:
                 Labyrinth.currenLabyrinth.setBesetzung(getX(), getY(), 0);
@@ -74,7 +73,6 @@ public class Player extends Character implements Tickable {
                 break;
             default:
                 GamePoints += Setting.Elements.Points.empty;
-                // haben bereits bewegt
         }
         PM.Point_Text=Integer.toString(GamePoints);
         if (invTimer > 0) {
@@ -113,8 +111,8 @@ public class Player extends Character implements Tickable {
         Position eyePosition = getRelativeEyePosition(facingangle);
         g.setColor(Color.black);
         g.fillOval(
-                getWindowXCoord() + eyePosition.get(M_AXIS.X) + Setting.Animator.CellWidth / 2 - 2,
-                getWindowYCoord() + eyePosition.get(M_AXIS.Y) + Setting.Animator.CellWidth / 2 - 2,
+                getWindowXCoord() + eyePosition.get(AXIS.X) + Setting.Animator.CellWidth / 2 - 2,
+                getWindowYCoord() + eyePosition.get(AXIS.Y) + Setting.Animator.CellWidth / 2 - 2,
                 4, 4); // Auge
     }
 
@@ -128,20 +126,23 @@ public class Player extends Character implements Tickable {
         return new Position(Augenpositionen[facingangle][0], Augenpositionen[facingangle][1]);
     }
 
-    private int convertdirection(M_AXIS direction, boolean fw) {
-        int _C = 0;
-        if (fw) {
-            if (direction == M_AXIS.X) {
-                _C = 0;
-            } else {
-                _C = 3;
-            }
-        } else {
-            if (direction == M_AXIS.X) {
-                _C = 2;
-            } else {
-                _C = 1;
-            }
+    private int convertdirection(RICHTUNG richtung) {
+        int _C;
+        switch (richtung) {
+            case LINKS:
+            _C=2;
+                break;
+            case OBEN:
+            _C=3;
+                break;
+            case RECHTS:
+            _C=0;
+                break;
+            case UNTEN:
+            _C=1;
+                break;
+            default:
+            _C=0; 
         }
         return _C;
     }

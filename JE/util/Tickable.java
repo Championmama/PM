@@ -1,9 +1,9 @@
 package util;
 
+import java.awt.Graphics;
+
 import src.PM;
 import src.Ticker;
-
-import java.awt.Graphics;
 
 public interface Tickable {
     //Observer Class for Ticker

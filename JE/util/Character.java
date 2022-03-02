@@ -1,6 +1,6 @@
 package util;
 import src.Setting;
-import util.Position.M_AXIS;
+import util.Position.AXIS;
 
 
 public class Character{
@@ -11,8 +11,8 @@ public class Character{
         p_Position=StartPosition;
     }
 
-    public void move(M_AXIS direction, boolean fw) {
-        p_Position.move(direction, fw);
+    public void move(RICHTUNG direction) {
+        p_Position.move(direction);
     }
     
     protected void setPosition(Position pos) {
@@ -22,10 +22,10 @@ public class Character{
         return p_Position;
     }
     public int getX() {
-        return p_Position.get(M_AXIS.X);
+        return p_Position.get(AXIS.X);
     }
     public int getY() {
-        return p_Position.get(M_AXIS.Y);
+        return p_Position.get(AXIS.Y);
     }
 
     public int getWindowXCoord() {
@@ -35,34 +35,24 @@ public class Character{
         return Setting.Animator.outmargin + 30 + getY() * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
 
-    protected class _Richtung {
-        public M_AXIS Axis;
-        public boolean fw;
-
-        public _Richtung(M_AXIS A, boolean fw) {
-            Axis = A;
-            this.fw = fw;
-        }
-    }
-
-    protected _Richtung convertdirectionBack(int facingangle) {
-        _Richtung _R;
+    protected RICHTUNG convertdirectionBack(int facingangle) {
+        RICHTUNG _R;
         switch (facingangle) {
             case 0:
-                _R = new _Richtung(M_AXIS.X, true);
+                _R = RICHTUNG.RECHTS;
                 break;
             case 1:
-                _R = new _Richtung(M_AXIS.Y, false);
+                _R = RICHTUNG.UNTEN;
                 break;
             case 2:
-                _R = new _Richtung(M_AXIS.X, false);
+                _R = RICHTUNG.LINKS;
                 break;
             case 3:
-                _R = new _Richtung(M_AXIS.Y, true);
+                _R = RICHTUNG.OBEN;
                 break;
 
             default:
-                _R = new _Richtung(M_AXIS.X, true);
+                _R = RICHTUNG.RECHTS;
                 break;
         }
         return _R;

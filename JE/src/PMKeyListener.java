@@ -1,8 +1,8 @@
 package src;
 
-import util.Position.M_AXIS;
-
 import java.awt.event.*;
+
+import util.RICHTUNG;
 
 public class PMKeyListener implements KeyListener {
     private Player m_player;
@@ -19,16 +19,16 @@ public class PMKeyListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case 37:
-                m_player.turn(M_AXIS.X, false);
+                m_player.turn(RICHTUNG.LINKS);
                 break;
             case 38:
-                m_player.turn(M_AXIS.Y, true);
+                m_player.turn(RICHTUNG.OBEN);
                 break;
             case 39:
-                m_player.turn(M_AXIS.X, true);
+                m_player.turn(RICHTUNG.RECHTS);
                 break;
             case 40:
-                m_player.turn(M_AXIS.Y, false);
+                m_player.turn(RICHTUNG.UNTEN);
                 break;
 
         }

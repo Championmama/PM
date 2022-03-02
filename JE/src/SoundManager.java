@@ -7,8 +7,9 @@ import javax.sound.sampled.*;
 
 public class SoundManager {
     private Clip c;
+    private boolean ValidFilePath;
 
-    SoundManager(PM pm) {
+    SoundManager() {
         try {
             // ------------------------------------------------
             // unten von
@@ -29,6 +30,7 @@ public class SoundManager {
             // ---------------------------------------
             System.out.println("started Audio");
             c = clip;
+            ValidFilePath = true;
 
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
@@ -38,10 +40,12 @@ public class SoundManager {
             e.printStackTrace();
         } catch (NullPointerException e) {
             System.out.println("wrong file Path");
+            ValidFilePath = false;
         }
     }
 
     public void stop() {
+        if(ValidFilePath)
         c.stop();
     }
 

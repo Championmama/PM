@@ -3,68 +3,97 @@ package util;
 import src.Setting;
 
 public class Position {
-    private int m_x;
-    private int m_y;
 
-    public Position(int x, int y) {
-        m_x = x;
-        m_y = y;
+  private int m_x;
+  private int m_y;
+  // m_y ist in einem Koordinatensystem, dass von oben anfängt:
+  /*
+    (0,0)(1,0)(2,0)
+    (0,1)(1,1)(2,1)
+    (0,2)(1,2)(2,2)
+  */
+
+  public Position(int x, int y) {
+    m_x = x;
+    m_y = y;
+  }
+
+  public void set(AXIS Axis, int value) {
+    switch (Axis) {
+      case X:
+        this.m_x = value;
+        break;
+      case Y:
+        this.m_y = value;
+        break;
+      default:
     }
+  }
 
-    public void set(M_AXIS Axis, int value) {
-        switch (Axis) {
-            case X:
-                this.m_x = value;
-                break;
-            case Y:
-                this.m_y = value;
-                break;
-            default:
-                System.err.println("Axis was not part of the enum");
-
-        }
+  public int get(AXIS Axis) {
+    int cPos;
+    switch (Axis) {
+      case X:
+        cPos = this.m_x;
+        break;
+      case Y:
+        cPos = this.m_y;
+        break;
+      default:
+        cPos = 0;
     }
+    return cPos;
+  }
 
-    public int get(M_AXIS Axis) {
-        int cPos;
-        switch (Axis) {
-            case X:
-                cPos = this.m_x;
-                break;
-            case Y:
-                cPos = this.m_y;
-                break;
-            default:
-                cPos = 0;
-                System.err.println("Axis was not part of the enum");
-
-        }
-        return cPos;
+  public void move(RICHTUNG direction) {
+    
+      if (m_x == Setting.width - 1 && direction == RICHTUNG.RECHTS) {
+        m_x = 0;
+      } else if (m_x == 0 && direction == RICHTUNG.LINKS) {
+        m_x = Setting.width - 1;
+      } else if (m_y == Setting.height - 1 && direction == RICHTUNG.UNTEN) {
+        m_y = 0;
+      } else if (m_y == 0 && direction == RICHTUNG.OBEN) {
+        m_y = Setting.height - 1;
+      } else {
+          switch (direction) {
+        case OBEN:
+          m_y--;
+          break;
+        case RECHTS:
+          m_x++;
+          break;
+        case LINKS:
+          m_x--;
+          break;
+        case UNTEN:
+          m_y++;
+          break;
+        default:
     }
+      }
+    
+      
+  }
 
-    public void move(M_AXIS direction, boolean fw) {
-        if (m_x == Setting.width-1 && direction == M_AXIS.X && fw) {
-            m_x = !Setting.Loop?Setting.width-1:0;
-        } else if (m_x == 0 && direction == M_AXIS.X && !fw) {
-            m_x = Setting.Loop?Setting.width-1:0;
-        } else if (m_y == Setting.height-1 && direction == M_AXIS.Y && !fw) {
-            m_y = !Setting.Loop?Setting.height-1:0;;
-        } else if (m_y == 0 && direction == M_AXIS.Y && fw) {
-            m_y = Setting.Loop?Setting.height-1:0;
-        } else {
-            switch (direction) {
-                case X:
-                    m_x += fw ? 1 : -1;
-                    break;
-                case Y:
-                    // umgekehrt weil die y-Koordinate von oben beginnt
-                    m_y += fw ? -1 : 1;
-                    break;
-            }
-        }
-    }
+  public enum AXIS {
+    X,
+    Y,
+  }
 
-    public enum M_AXIS {
-        X, Y
+  public static RICHTUNG switchdir(RICHTUNG r) {
+    switch (r) {
+      case LINKS:
+        return RICHTUNG.RECHTS;
+      case OBEN:
+        return RICHTUNG.UNTEN;
+      case RECHTS:
+        return RICHTUNG.LINKS;
+      case UNTEN:
+        return RICHTUNG.OBEN;
+      default:
+      return RICHTUNG.RECHTS;
+        
     }
+  }
 }

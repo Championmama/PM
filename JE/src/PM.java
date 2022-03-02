@@ -1,6 +1,5 @@
 package src;
 
-import java.awt.Graphics;
 import javax.swing.FocusManager;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,15 +10,13 @@ import javax.swing.plaf.InsetsUIResource;
 import src.Ghost.GHOSTTYPES;
 
 public class PM extends JFrame {
-  public static JButton StartButton; //Button zum starten
+  public JButton StartButton;
+
   public static Ticker ticker;
+
   public static String Point_Text;
 
-
-  private Timer timer;
   private JTextField eingabe = new JTextField();
-  private Graphics g;
-  private Player player;
 
   public PM() {
     super();
@@ -40,47 +37,65 @@ public class PM extends JFrame {
     StartButton.setVisible(true);
     StartButton.addActionListener(new ButtonListener(this));
     add(StartButton);
-
   }
 
   void startGame() {
+    //Startbutton deaktivieren
     StartButton.setVisible(false);
     StartButton.setBounds(0, 0, 1, 1);
 
-    timer = new Timer((int) (1000 / Setting.TickRate), null);
-    timer.setRepeats(true);
-    g = getGraphics();
+    // sound definieren
+    SoundManager sManager = new SoundManager();
 
-    // Definiere alle Objekte
-    SoundManager sManager = new SoundManager(this);
 
+    // GameObjekte definieren
     Labyrinth lab = new Labyrinth();
 
-    player = new Player(Setting.StartPosition, sManager);
+    Player player = new Player(Setting.StartPosition, sManager);
 
-    Ghost Pinky = new Ghost(Setting.Elements.GhostSpawns.Spawn[0], GHOSTTYPES.PINKY, player);
-    Ghost Greeny = new Ghost(Setting.Elements.GhostSpawns.Spawn[1], GHOSTTYPES.GREENY, player);
-    Ghost Limy = new Ghost(Setting.Elements.GhostSpawns.Spawn[2], GHOSTTYPES.LIMY, player);
-    Ghost Stretchy = new Ghost(Setting.Elements.GhostSpawns.Spawn[3], GHOSTTYPES.STRETCHY, player);
+    Ghost pinky = new Ghost(
+      Setting.Elements.GhostSpawns.Spawn[0],
+      GHOSTTYPES.PINKY,
+      player
+    );
+    Ghost greeny = new Ghost(
+      Setting.Elements.GhostSpawns.Spawn[1],
+      GHOSTTYPES.GREENY,
+      player
+    );
+    Ghost limy = new Ghost(
+      Setting.Elements.GhostSpawns.Spawn[2],
+      GHOSTTYPES.LIMY,
+      player
+    );
+    Ghost orangy = new Ghost(
+      Setting.Elements.GhostSpawns.Spawn[3],
+      GHOSTTYPES.STRETCHY,
+      player
+    );
 
+    // GameObjekte bewegbar machen
+    ticker = new Ticker(getGraphics());
+
+    Timer timer = new Timer((1000 / Setting.TickRate), null);
+    timer.setRepeats(true);
+    timer.addActionListener(ticker);
+
+    ticker.attach(lab);
+    ticker.attach(player);
+    ticker.attach(pinky);
+    ticker.attach(greeny);
+    ticker.attach(limy);
+    ticker.attach(orangy);
+
+    // Inputs warnehmen
     eingabe.addKeyListener(new PMKeyListener(player));
     eingabe.setBounds(0, 0, 1, 1);
     add(eingabe);
 
-    ticker = new Ticker(g);
-    ticker.attach(lab);
-    ticker.attach(player);
-    ticker.attach(Pinky);
-    ticker.attach(Greeny);
-    ticker.attach(Limy);
-    ticker.attach(Stretchy);
-    timer.addActionListener(ticker);
-
     //Fokus setzen
     FocusManager.getCurrentManager().focusNextComponent(this);
 
-    System.out.println("start");
     timer.start();
   }
-
 }
