@@ -1,0 +1,233 @@
+<h1 id="pacman">Pacman</h1>
+<h2 id="aufbau">Aufbau</h2>
+<hr />
+<p><a href="UML.png">image</a></p>
+<figure>
+<img src="UML.png" alt="" /><figcaption>UML</figcaption>
+</figure>
+<hr />
+<h2 id="verzeichnis">Verzeichnis</h2>
+<ul>
+<li><p><a href="#aufbau">Aufbau</a></p></li>
+<li><p><a href="#Convention">conventions</a></p></li>
+<li><p>Concepts</p>
+<ul>
+<li><a href="#animation">Animation</a></li>
+</ul></li>
+<li><p>src</p>
+<ul>
+<li><a href="#buttonlistener">ButtonListener.java</a></li>
+<li><a href="#Ghost">Ghost.java</a></li>
+<li><a href="#Labyrinth">Labyrinth.java</a></li>
+<li><a href="#Main">Main.java</a></li>
+<li><a href="#player">Player.java</a></li>
+<li><a href="#pm-pacman">PM.java</a></li>
+<li><a href="#pmkeylistenerinput">PMKeyListener.java</a></li>
+<li><a href="#setting">Setting.java</a></li>
+<li><a href="#ticker">Ticker.java</a></li>
+</ul></li>
+<li><p><a href="#character">Util</a></p></li>
+</ul>
+<hr />
+<h2 id="conventions">Conventions</h2>
+<ul>
+<li>Präfix
+<ul>
+<li>m_ ist privat. (private member)</li>
+<li>Ohne ist public.</li>
+<li>p_ ist protected.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="animation">Animation</h2>
+<p>In der <a href="#ticker">Ticker</a> Klasse (in <code>benachrichtige()</code>) wird die <code>draw()</code>-Methode den Klassen <a href="#labyrinth"><code>Labyrinth</code></a>, <a href="#ghost"><code>Ghost</code></a> und <a href="#player"><code>Player</code></a> aufgerufen.</p>
+<p>Dort werden auch Texturen, wie bei der Kirsche oder Aufbau durch Formen beim Rest gespeichert.</p>
+<p>Der <strong>Score</strong>, der unter <em>PM</em> als <strong>PM.Point_Text</strong> gespeichert wird wird im Labyrinth (Z.132) gezeichnet:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>m_g.<span class="fu">setColor</span>(<span class="bu">Color</span>.<span class="fu">black</span>);</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>m_g.<span class="fu">drawString</span>(PM.<span class="fu">Point_Text</span>, <span class="dv">650</span>, <span class="dv">50</span>); </span></code></pre></div>
+<hr />
+<h2 id="src">src</h2>
+<hr />
+<h2 id="buttonlistener">ButtonListener</h2>
+<p>Verantwortlich für den Start-Knopf und startet das Spiel demnach durch <code>m_pm.startGame();</code>.</p>
+<hr />
+<h2 id="ghost">Ghost</h2>
+<p>Geister Klasse benutzt das enum GHOSTTYPE, um zwischen den Geistern zu unterscheiden.</p>
+<p>Jeder Geist hat ein <code>Target</code> und <code>m_targetPosition</code>, dass zum Beispiel die Position des Spielers oder der Basis der Geister sein kann (Momentan nur die Position des Spielers).</p>
+<p>Vom Ticker kommt das <code>tick()</code>-Signal an und der Geist wird bewegt, wenn nicht der <code>m_fairnessTimer</code> aktiv ist, der die Geiser anhählt am Anfang des Spiels und wenn sie sterben.</p>
+<p>Der Geist bewegt sich in Richtung des Spielers mit:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">float</span> dx = m_targetPosition.<span class="fu">get</span>(AXIS.<span class="fu">X</span>) - <span class="fu">getX</span>() + (<span class="dt">float</span>)(<span class="bu">Math</span>.<span class="fu">random</span>()-<span class="fl">0.</span><span class="dv">5</span>)*<span class="dv">5</span>;  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="dt">float</span> dy = m_targetPosition.<span class="fu">get</span>(AXIS.<span class="fu">Y</span>) - <span class="fu">getY</span>() + (<span class="dt">float</span>)(<span class="bu">Math</span>.<span class="fu">random</span>()-<span class="fl">0.</span><span class="dv">5</span>)*<span class="dv">5</span>;</span></code></pre></div>
+<p>Daraus wird der geringere Wert genommen für die Richtung.</p>
+<hr />
+<h2 id="labyrinth">Labyrinth</h2>
+<p>Aufgabe der Datei ist es auf das Labyrinth und die Felder aufzupassen und diese zu zeichnen.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Zahl</th>
+<th>Objekt</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>Leer</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Wand</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Kirsche</td>
+<td><img src="JE/assets/cherry.jpg" alt="alt" /></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>normaler-Punkt</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Unbesiegbarkeits-Punkt</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Tür für Geister</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Außerdem wird hier noch ein Großteil des HUD gezeichnet.</p>
+<p>Es gibt immer ein aktives Labyrinth/Level, was mit <code>setActive()</code> geändert wird.</p>
+<ol type="1">
+<li><p><code>tick()</code> wird vom Ticker gecallt und überprüft, ob gewonnen wurde.</p></li>
+<li><p><code>draw()</code> kommt danach und malt:</p>
+<ul>
+<li>Besetzung</li>
+<li>HUD (Punkte)</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="main">Main</h2>
+<p>Erstellt PM.</p>
+<hr />
+<h2 id="player">Player</h2>
+<blockquote>
+<p>mundstate</p>
+</blockquote>
+<p>ist entweder 1 oder 0 und sagt, wie der Mund gemalt werden soll.</p>
+<blockquote>
+<p>facing angle</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>facingangle</th>
+<th>Richtung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>right</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>down</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>left</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>up</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>lives</p>
+</blockquote>
+<p>Leben von Pac Man, startet bei <code>Setting.Lives</code></p>
+<blockquote>
+<p>invTimer</p>
+</blockquote>
+<p>wird von Unbesiegbarkeitspille gesetzt und zählt dann jeden Tick runter. Wenn das größer als null ist, its PacMan unbesiegbar.</p>
+<blockquote>
+<p>sManager</p>
+</blockquote>
+<p>allein dafür da die Musik zu stoppen, wenn PacMan stirbt.</p>
+<hr />
+<h2 id="pm-pacman">PM (PacMan)</h2>
+<p>Ist für das Programm zuständig.</p>
+<ul>
+<li>erstellt das Fenster
+<ul>
+<li>erstellt den Button</li>
+</ul></li>
+<li>startet das Spiel
+<ul>
+<li>macht <a href="#buttonlistener">Button</a> unsichtbar</li>
+<li>erstellt den <a href="#ticker">Timer</a></li>
+<li>holt <code>Graphics</code></li>
+<li>erstellt SoundManager</li>
+<li>erstellt <a href="#labyrinth">Labyrinth</a></li>
+<li>Objekte <a href="#player">Player</a> und Geister erstellen.</li>
+<li>fügt input dem Eingabefeld zu.</li>
+<li>lässt den Tickervon allen <a href="#Tickable">tickable</a> wissen.</li>
+<li>setzt den Focus vom User auf das Spielfeld.</li>
+<li>startet den Timer.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="pmkeylistenerinput">PMKeyListener(Input)</h2>
+<p>dreht den player in die richtige Richtung.</p>
+<hr />
+<h2 id="setting">Setting</h2>
+<p>Einstellungen</p>
+<hr />
+<h3 id="soundmanager">SoundManager</h3>
+<p>erstellt Sound.</p>
+<p>Um Hintergrund-Musik hinzuzufügen, muss in assets eine Datei namens <code>BGMusic.wav</code> (oder was auch immer in <code>Setting.MusicFilePath</code> ist) hinzugefügt werden, die dann auf Dauerschleife läuft.</p>
+<hr />
+<h2 id="ticker">Ticker</h2>
+<p>folgt dem <a href="https://www.tutorialspoint.com/design_pattern/observer_pattern.htm">Observer</a> pattern:</p>
+<p>Es gibt Observer, die wenn sich das Objekt verändert, eine Nachricht bekommen.</p>
+<p>Der Ticker ist dabei das Objekt, dass alle benachrichtigt, die es observen (appended sind).</p>
+<p>Dafür hat es</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">private</span> <span class="bu">List</span>&lt;Tickable&gt; tickables = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;Tickable&gt;();</span></code></pre></div>
+<p>was die Liste aller Objekte sind, die bei einem <code>tick()</code> benachrichtigt werden sollen.</p>
+<p>Diese werden in die Liste in <code>append()</code> mit aufgenommen, was in <a href="#pm-pacman">PM</a> aufgerufen wird.</p>
+<p>Es wird immer zuerst die <code>tick()</code> Funktion der Klassen aufgerufen und dann gemalt, um Die Tode von Geistern/Pacman richtig anzuzeigen.</p>
+<h3 id="tickable">Tickable</h3>
+<p>sind die Klassen, die vom Tick-Cycle betroffen sind und neu gemalt werden sollen.</p>
+<p>Dafür müssen sie eine <code>draw()</code> und <code>tick()</code>-Methode enthalten, die dann vom Ticker aufgerufen werden.</p>
+<hr />
+<h2 id="utilities">Utilities</h2>
+<hr />
+<h2 id="character">Character</h2>
+<p>Klasse von der sowohl Geister als auch der Player erbt.</p>
+<p>kümmert sich um die Position des Spielers mit</p>
+<ul>
+<li><code>move()</code></li>
+<li><code>setPosition()</code></li>
+<li><code>getX()</code></li>
+<li><code>getY()</code></li>
+<li><code>getWindowXCoord()</code></li>
+<li><code>getWindowYCoorc()</code></li>
+</ul>
+<h2 id="position">Position</h2>
+<p>speichert und geht mit der X und Y Koordinate aller Objekte um.</p>
+<ul>
+<li><code>get()</code></li>
+<li><code>set()</code></li>
+<li><code>move()</code></li>
+</ul>
+<p>Sowie es die AXIS besitzt, alse X oder Y-Achse.</p>
