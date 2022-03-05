@@ -4,7 +4,6 @@ import javax.swing.ImageIcon;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.io.InputStream;
 import java.net.URL;
 
 import util.Tickable;
@@ -12,27 +11,6 @@ import util.Tickable;
 public class Labyrinth implements Tickable {
     public static Labyrinth currenLabyrinth;
     private static int[][] m_Besetzung = {
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1 },
-        { 1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
-        { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
-        { 1, 4, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1 },
-        { 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
-        { 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1 },
-        { 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1 },
-        { 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 5, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 4, 1 },
-        { 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1 },
-        { 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-        { 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1 },
-        { 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-        { 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 4, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-        { 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-        { 1, 0, 1, 0, 4, 0, 0, 0, 0, 0, 4, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1 },
-        { 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1 },
-        { 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1 },
-        { 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1 } };
-    /*{
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1 },
             { 1, 3, 0, 3, 3, 3, 3, 0, 3, 0, 0, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 1 },
             { 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 1, 1, 1, 0, 3, 1, 3, 0, 0, 0, 1 },
@@ -52,12 +30,12 @@ public class Labyrinth implements Tickable {
             { 1, 3, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 3, 1, 0, 3, 0, 0, 1, 0, 3, 1, 0, 3, 1, 0, 1, 3, 0, 1 },
             { 1, 0, 3, 0, 1, 1, 3, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1 },
             { 1, 4, 0, 3, 0, 3, 0, 3, 0, 3, 4, 3, 0, 3, 0, 3, 0, 0, 0, 3, 0, 0, 3, 0, 0, 3, 0, 0, 3, 1 },
-            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1 } };*/
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1 } };
 
     private ImageIcon m_img;
 
     public Labyrinth() {
-        URL u= getClass().getResource("../assets/cherry.jpg");
+        URL u = getClass().getResource("../assets/cherry.jpg");
         m_img = new ImageIcon(u);
         setActive();
     }
@@ -92,9 +70,10 @@ public class Labyrinth implements Tickable {
     }
 
     private Graphics m_g;
+
     @Override
     public void draw(Graphics g) {
-        if(m_g==null) {
+        if (m_g == null) {
             m_g = g;
         }
         for (int x = 0; x < Setting.width; x++) {
@@ -122,7 +101,7 @@ public class Labyrinth implements Tickable {
                         break;
                     case 2: // Cherry
                         drawBG(x, y);
-                        if (m_img.getImageLoadStatus()== 4)
+                        if (m_img.getImageLoadStatus() == 4)
                             System.err.println("image not loaded");
                         g.drawImage(m_img.getImage(),
                                 getWindowXCoord(x),
@@ -152,6 +131,7 @@ public class Labyrinth implements Tickable {
         m_g.setColor(Color.black);
         m_g.drawString(PM.Point_Text, 650, 50);
     }
+
     // rellativ zu Bildschirmkoordinaten
     private int getWindowXCoord(int x) {
         return Setting.Animator.outmargin + 7 + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin);

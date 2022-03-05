@@ -57,7 +57,7 @@ public class Player extends Character implements Tickable {
         switch (F) {
             case 1:
             case 5:
-                super.move(p_Position.switchdir(richtung));
+                super.move(Position.switchdir(richtung));
                 break;
             case 2:
                 Labyrinth.currenLabyrinth.setBesetzung(getX(), getY(), 0);
