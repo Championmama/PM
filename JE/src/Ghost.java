@@ -1,9 +1,9 @@
 package src;
 
+import util.AXIS;
 import util.Character;
 import util.Position;
 import util.Tickable;
-import util.Position.AXIS;
 import util.RICHTUNG;
 
 import java.awt.Color;
@@ -86,7 +86,7 @@ public class Ghost extends Character implements Tickable{
             super.move(_S);
             int F = Labyrinth.currenLabyrinth.getBesetzung(getX(), getY());
             if (F == 1) {
-                super.move(Position.switchdir(_S));
+                super.move(RICHTUNG.switchdir(_S));
                 movable = false;
                 directionR++;
             } else {

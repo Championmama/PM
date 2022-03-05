@@ -128,6 +128,7 @@ public class Labyrinth implements Tickable {
         } // end of for
         m_g.setColor(Color.white);
         m_g.fillRect(650, 10, 50, 50);
+        
         m_g.setColor(Color.black);
         m_g.drawString(PM.Point_Text, 650, 50);
     }

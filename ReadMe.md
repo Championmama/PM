@@ -35,9 +35,11 @@ private Project of Pacman in java
 
 ## Animation
 
-In der [Ticker](#ticker) Klasse wird die `draw()`-Methode den Klassen [`Labyrinth`](#labyrinth), [`Ghost`](#ghost) und [`Player`](#player) aufgerufen
+In der [Ticker](#ticker) Klasse (in `benachrichtige()`) wird die `draw()`-Methode den Klassen [`Labyrinth`](#labyrinth), [`Ghost`](#ghost) und [`Player`](#player) aufgerufen.
 
-Zum Schluss wird der __Score__ angezeigt, der unter _PM_ als __PM.Point_Text__ gespeichert wird:
+Dort werden auch Texturen, wie bei der Kirsche oder Aufbau durch Formen beim Rest gespeichert.
+
+Der __Score__, der unter _PM_ als __PM.Point_Text__ gespeichert wird wird im Labyrinth (Z.132) gezeichnet:
 
 ```java
 m_g.setColor(Color.black);
@@ -60,19 +62,19 @@ Verantwortlich für den Start-Knopf und startet das Spiel demnach durch `m_pm.st
 
 Geister Klasse benutzt das enum GHOSTTYPE, um zwischen den Geistern zu unterscheiden.
 
-Jeder Geist hat ein `Target` und `m_targetPosition`, dass zum Beispiel die Position des Spielers oder der Basis der Geister sein kann.
+Jeder Geist hat ein `Target` und `m_targetPosition`, dass zum Beispiel die Position des Spielers oder der Basis der Geister sein kann (Momentan nur die Position des Spielers).
 
 Vom Ticker kommt das `tick()`-Signal an und der Geist wird bewegt, wenn nicht der `m_fairnessTimer` aktiv ist, der die Geiser anhählt am Anfang des Spiels und wenn sie sterben.
 
 Der Geist bewegt sich in Richtung des Spielers mit:
 
 ```java
-float dx = m_targetPosition.get(M_AXIS.X) - getX() + (float)(Math.random()-0.5)*5;  
+float dx = m_targetPosition.get(AXIS.X) - getX() + (float)(Math.random()-0.5)*5;  
 
-float dy = m_targetPosition.get(M_AXIS.Y) - getY() + (float)(Math.random()-0.5)*5;
+float dy = m_targetPosition.get(AXIS.Y) - getY() + (float)(Math.random()-0.5)*5;
 ```
 
-Daraus wird der geringere Wert genommen für die Richtung in M_AXIS und forward.
+Daraus wird der geringere Wert genommen für die Richtung.
 
 ---
 
@@ -99,7 +101,7 @@ Es gibt immer ein aktives Labyrinth/Level, was mit `setActive()` geändert wird.
 2. `draw()`
    kommt danach und malt:
    * Besetzung
-   * HUD
+   * HUD (Punkte)
 
 ---
 
@@ -110,15 +112,6 @@ Erstellt PM.
 ---
 
 ## Player
-
-```java
-private int mundState;
-private int facingangle;
-private int lives;
-
-private int invTimer = 0;
-private SoundManager sManager;
-```
 
 > mundstate
 
@@ -194,7 +187,7 @@ folgt dem [Observer](<https://www.tutorialspoint.com/design_pattern/observer_pat
 
 Es gibt Observer, die wenn sich das Objekt verändert, eine Nachricht bekommen.
 
-Der Ticker ist dabei das Objekt, dass alle benachrichtigt, die es anschauen(appended sind).
+Der Ticker ist dabei das Objekt, dass alle benachrichtigt, die es observen (appended sind).
 
 Dafür hat es
 
@@ -241,4 +234,4 @@ speichert und geht mit der X und Y Koordinate aller Objekte um.
 * `set()`
 * `move()`
 
-Sowie es die M_AXIS besitzt, alse X oder Y-Achse.
+Sowie es die AXIS besitzt, alse X oder Y-Achse.

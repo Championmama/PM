@@ -1,9 +1,9 @@
 package src;
 
+import util.AXIS;
 import util.Character;
 import util.Position;
 import util.Tickable;
-import util.Position.AXIS;
 import util.RICHTUNG;
 
 import java.awt.Color;
@@ -57,7 +57,7 @@ public class Player extends Character implements Tickable {
         switch (F) {
             case 1:
             case 5:
-                super.move(Position.switchdir(richtung));
+                super.move(RICHTUNG.switchdir(richtung));
                 break;
             case 2:
                 Labyrinth.currenLabyrinth.setBesetzung(getX(), getY(), 0);

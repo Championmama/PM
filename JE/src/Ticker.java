@@ -21,7 +21,7 @@ public class Ticker implements ActionListener {
     public void attach (Tickable tickable) {
         tickables.add(tickable);
     }
-
+    //sorgt für das malen und ticken der Bewegbaren Objekte.
     public void benachrichtige() {
         for(Tickable t : tickables) {
             t.tick();

@@ -75,25 +75,4 @@ public class Position {
     
       
   }
-
-  public enum AXIS {
-    X,
-    Y,
-  }
-
-  public static RICHTUNG switchdir(RICHTUNG r) {
-    switch (r) {
-      case LINKS:
-        return RICHTUNG.RECHTS;
-      case OBEN:
-        return RICHTUNG.UNTEN;
-      case RECHTS:
-        return RICHTUNG.LINKS;
-      case UNTEN:
-        return RICHTUNG.OBEN;
-      default:
-      return RICHTUNG.RECHTS;
-        
-    }
-  }
 }

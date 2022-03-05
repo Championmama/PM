@@ -1,6 +1,5 @@
 package util;
 import src.Setting;
-import util.Position.AXIS;
 
 
 public class Character{
