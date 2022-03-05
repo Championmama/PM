@@ -10,24 +10,24 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Player extends Character implements Tickable {
-    private int mundState;
-    private int facingangle;// in PI/2 radians 0:right; 1:down; 2:left; 3:up
-    private int lives;
+    private int m_mundState;
+    private int m_facingangle;// in PI/2 radians 0:right; 1:down; 2:left; 3:up
+    private int m_lives;
     public int GamePoints;
-    private int invTimer = 0;
+    private int m_invTimer = 0;
     private SoundManager sManager;
 
     public Player(Position pos, SoundManager sm) {
         super(pos);
-        lives = Setting.Lives;
+        m_lives = Setting.Lives;
         GamePoints = 0;
         PM.Point_Text="";
         sManager = sm;
     }
 
     public void die () {
-        lives--;
-        if(lives<=0) {
+        m_lives--;
+        if(m_lives<=0) {
             ticker.setState(false);
             System.out.println("lost");
             sManager.stop();
@@ -37,15 +37,15 @@ public class Player extends Character implements Tickable {
     }
 
     public void turn(RICHTUNG richtung) {
-        if (facingangle == convertdirection(richtung))
+        if (m_facingangle == convertdirection(richtung))
             return;
         //
-        facingangle = convertdirection(richtung);
+        m_facingangle = convertdirection(richtung);
     }
 
 
     public void move() {
-        RICHTUNG _r = convertdirectionBack(facingangle);
+        RICHTUNG _r = RICHTUNG.convertdirectionBack(m_facingangle);
         move(_r);
     }
 
@@ -75,18 +75,18 @@ public class Player extends Character implements Tickable {
                 GamePoints += Setting.Elements.Points.empty;
         }
         PM.Point_Text=Integer.toString(GamePoints);
-        if (invTimer > 0) {
-            invTimer--;
+        if (m_invTimer > 0) {
+            m_invTimer--;
         }
     }
     public boolean invincible () {
-        return invTimer > 0;
+        return m_invTimer > 0;
     }
     
     // #Effekte
     private void eatcherry() {
         GamePoints += Setting.Elements.Points.Cherry;
-        lives++;
+        m_lives++;
     }
 
     private void eatpoint() {
@@ -94,38 +94,22 @@ public class Player extends Character implements Tickable {
     }
 
     private void eatinv() {
-        invTimer = Setting.invTimer;
+        m_invTimer = Setting.invTimer;
         GamePoints += Setting.Elements.Points.inv;
     }
 
-    public void draw(Graphics g) {
-        g.setColor((invTimer==0)?Color.yellow:Color.BLUE);
-        if (mundState == 1) {
-            g.fillArc(getWindowXCoord(), getWindowYCoord(), Setting.Animator.CellHeight,
-                    Setting.Animator.CellWidth, -90 * facingangle + 40, 280);
-        } else {
-            g.fillArc(getWindowXCoord(), getWindowYCoord(), Setting.Animator.CellHeight,
-                    Setting.Animator.CellWidth, -90 * facingangle + 15, 330);
-        }
-        mundState = (mundState + 1) % 2;
-        Position eyePosition = getRelativeEyePosition(facingangle);
-        g.setColor(Color.black);
-        g.fillOval(
-                getWindowXCoord() + eyePosition.get(AXIS.X) + Setting.Animator.CellWidth / 2 - 2,
-                getWindowYCoord() + eyePosition.get(AXIS.Y) + Setting.Animator.CellWidth / 2 - 2,
-                4, 4); // Auge
-    }
-
-    private Position getRelativeEyePosition(int facingangle) {
+    // Position der Augen
+    private Position getRelativeEyePosition(int m_facingangle) {
         int Augenpositionen[][] = {
                 { 2, -4 },
                 { 4, 2 },
                 { -2, -4 },
                 { 4, -4 }
         };
-        return new Position(Augenpositionen[facingangle][0], Augenpositionen[facingangle][1]);
+        return new Position(Augenpositionen[m_facingangle][0], Augenpositionen[m_facingangle][1]);
     }
 
+    // Aus Richtung wird facingangle gemacht
     private int convertdirection(RICHTUNG richtung) {
         int _C;
         switch (richtung) {
@@ -147,6 +131,26 @@ public class Player extends Character implements Tickable {
         return _C;
     }
 
+
+    // Interface Methoden
+    @Override
+    public void draw(Graphics g) {
+        g.setColor((m_invTimer==0)?Color.yellow:Color.BLUE);
+        if (m_mundState == 1) {
+            g.fillArc(getWindowXCoord(), getWindowYCoord(), Setting.Animator.CellHeight,
+                    Setting.Animator.CellWidth, -90 * m_facingangle + 40, 280);
+        } else {
+            g.fillArc(getWindowXCoord(), getWindowYCoord(), Setting.Animator.CellHeight,
+                    Setting.Animator.CellWidth, -90 * m_facingangle + 15, 330);
+        }
+        m_mundState = (m_mundState + 1) % 2;
+        Position eyePosition = getRelativeEyePosition(m_facingangle);
+        g.setColor(Color.black);
+        g.fillOval(
+                getWindowXCoord() + eyePosition.get(AXIS.X) + Setting.Animator.CellWidth / 2 - 2,
+                getWindowYCoord() + eyePosition.get(AXIS.Y) + Setting.Animator.CellWidth / 2 - 2,
+                4, 4); // Auge
+    }
 
     @Override 
     public void tick() {

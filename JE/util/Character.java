@@ -33,27 +33,4 @@ public class Character{
     public int getWindowYCoord() {
         return Setting.Animator.outmargin + 30 + getY() * (Setting.Animator.CellHeight + Setting.Animator.inmargin);
     }
-
-    protected RICHTUNG convertdirectionBack(int facingangle) {
-        RICHTUNG _R;
-        switch (facingangle) {
-            case 0:
-                _R = RICHTUNG.RECHTS;
-                break;
-            case 1:
-                _R = RICHTUNG.UNTEN;
-                break;
-            case 2:
-                _R = RICHTUNG.LINKS;
-                break;
-            case 3:
-                _R = RICHTUNG.OBEN;
-                break;
-
-            default:
-                _R = RICHTUNG.RECHTS;
-                break;
-        }
-        return _R;
-    }
 }

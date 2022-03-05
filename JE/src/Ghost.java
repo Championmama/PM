@@ -82,7 +82,7 @@ public class Ghost extends Character implements Tickable{
         boolean movable = false;
 
         while (!movable) {
-            RICHTUNG _S = convertdirectionBack(directionR % 4);
+            RICHTUNG _S = RICHTUNG.convertdirectionBack(directionR % 4);
             super.move(_S);
             int F = Labyrinth.currenLabyrinth.getBesetzung(getX(), getY());
             if (F == 1) {
@@ -94,6 +94,9 @@ public class Ghost extends Character implements Tickable{
             }
         }
     }
+
+    // Interface Methoden
+    
     @Override
     public void draw(Graphics g) {
         

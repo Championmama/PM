@@ -52,6 +52,8 @@ public class Labyrinth implements Tickable {
         return m_Besetzung[y][x];
     }
 
+    // Interface Methoden
+
     @Override
     public void tick() {
         boolean _GameOver = true;
@@ -133,6 +135,9 @@ public class Labyrinth implements Tickable {
         m_g.drawString(PM.Point_Text, 650, 50);
     }
 
+    // Ende der Interface Methoden
+
+    
     // rellativ zu Bildschirmkoordinaten
     private int getWindowXCoord(int x) {
         return Setting.Animator.outmargin + 7 + x * (Setting.Animator.CellWidth + Setting.Animator.inmargin);
